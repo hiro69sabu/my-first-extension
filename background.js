@@ -1,15 +1,17 @@
-// このファイルは拡張機能のバックグラウンドで動作するスクリプトです。
+// background.js - 最終形態
 
-// 拡張機能がインストールされた、またはアップデートされた時に一度だけ実行されるイベント
 chrome.runtime.onInstalled.addListener(() => {
   console.log('My First Extension - Background script installed.');
 });
 
-// すべての通信リクエストを監視するイベントリスナー
 chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
-    // リクエストの詳細の中から、URLだけをコンソールに出力する
-    console.log("Request URL:", details.url);
+    // URLに ".m3u8" という文字列が含まれている場合のみ、コンソールに出力する
+    if (details.url.includes(".m3u8")) {
+      console.log("!!!!!!!! M3U8 Found !!!!!!!!");
+      console.log(details.url);
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
   },
   {
     urls: ["<all_urls>"] // すべてのURLを対象とする
