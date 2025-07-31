@@ -11,6 +11,7 @@
     "scripts": ["background.js"]
   },
   "permissions": [
-    "<all_urls>"
+    "<all_urls>",
+    "webRequest"
   ]
 }
