@@ -1,4 +1,4 @@
-// background.js - 最終形態
+// background.js - M3U8専門の、最初の、探偵
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log('My First Extension - Background script installed.');
@@ -14,6 +14,6 @@ chrome.webRequest.onBeforeRequest.addListener(
     }
   },
   {
-    urls: ["<all_urls>"] // すべてのURLを対象とする
+    urls: ["<all_urls>"]
   }
 );
