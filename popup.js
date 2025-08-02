@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const currentTabId = tabs[0].id;
             
+            // バックグラウンドに現在のタブIDを渡してURLを要求
             chrome.runtime.sendMessage({ type: "getUrlsForTab", tabId: currentTabId }, function(response) {
                 videoListDiv.innerHTML = ''; // リストをクリア
 
