@@ -16,20 +16,33 @@ chrome.webRequest.onBeforeRequest.addListener(
             const url = new URL(details.url);
             const itag = url.searchParams.get("itag");
             let quality = "不明";
+            let filename = "video.mp4"; // デフォルトのファイル名
 
             // itagに基づいて画質を判断（簡略化された例）
             switch (itag) {
                 case "18":
-                    quality = "360p (MP4)";
+                    quality = "360p";
+                    filename = "video_360p.mp4";
                     break;
                 case "22":
-                    quality = "720p (MP4)";
+                    quality = "720p";
+                    filename = "video_720p.mp4";
                     break;
                 case "37":
-                    quality = "1080p (MP4)";
+                    quality = "1080p";
+                    filename = "video_1080p.mp4";
                     break;
                 case "38":
-                    quality = "4K (MP4)";
+                    quality = "4K";
+                    filename = "video_4K.mp4";
+                    break;
+                case "137":
+                    quality = "1080p (video only)";
+                    filename = "video_1080p_only.mp4";
+                    break;
+                case "140":
+                    quality = "audio only";
+                    filename = "audio.mp4";
                     break;
                 default:
                     quality = `不明 (itag: ${itag})`;
@@ -37,7 +50,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
             // URLがすでにリストに存在しない場合のみ追加
             if (!detectedVideoUrls[tabId].some(item => item.url === details.url)) {
-                detectedVideoUrls[tabId].push({ url: details.url, quality: quality });
+                detectedVideoUrls[tabId].push({ url: details.url, quality: quality, filename: filename });
                 // ポップアップにURLが更新されたことを通知
                 chrome.runtime.sendMessage({ type: "urlUpdate", tabId: tabId, urls: detectedVideoUrls[tabId] });
             }
