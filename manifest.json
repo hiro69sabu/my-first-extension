@@ -5,10 +5,12 @@
   "description": "Download YouTube videos directly from your browser.",
   "permissions": [
     "downloads",
+    "activeTab",
+    "tabs",
     "webRequest",
     "webRequestBlocking",
-    "*://*.youtube.com/*",
-    "*://*.googlevideo.com/*"
+    "http://*/*",
+    "https://*/*"
   ],
   "background": {
     "scripts": ["background.js"],
